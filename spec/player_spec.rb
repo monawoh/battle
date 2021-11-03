@@ -12,7 +12,7 @@ describe Player do
 
     describe '#hit_points' do
         it 'Returns hit points' do
-            expect(monaliza.hit_points).to eq described_class::DEFAULT_HIT_POINTS
+            expect(adam.hit_points).to eq described_class::DEFAULT_HIT_POINTS
         end
     end 
 
