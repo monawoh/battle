@@ -21,10 +21,19 @@ class Battle < Sinatra::Base
     get '/play' do
         @player_one = session[:player_one]
         @player_two = session[:player_two]
+        @player_two_hit_point = session[:player_two_hit_point]
         erb(:play)
+
     end
 
     # start server if ruby file executed directly
     run! if app_file == $0
+
+
+
+
+
+
+
 end
 
