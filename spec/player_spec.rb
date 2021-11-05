@@ -1,4 +1,5 @@
 require 'player'
+require 'game'
 
 describe Player do
     subject(:monaliza) { Player.new('Monaliza') }
@@ -19,7 +20,7 @@ describe Player do
     describe '#attack' do
         it 'Damages the player' do
             expect(adam).to receive(:receive_damage)
-            monaliza.attack(adam)
+            Game.new.attack(adam)
         end
     end
 
