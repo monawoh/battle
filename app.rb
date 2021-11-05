@@ -1,6 +1,8 @@
 require 'sinatra/base'
-# require 'sinatra/reloader'
+require 'sinatra/reloader'
 require './lib/player'
+require './lib/game'
+
 
 class Battle < Sinatra::Base 
     enable :sessions
@@ -12,17 +14,16 @@ class Battle < Sinatra::Base
         erb(:index)
     end
 
-
     post '/names' do
-        $player_one = Player.new(params[:player_one])
-        $player_two = Player.new(params[:player_two])
+        player_one = Player.new(params[:player_one])
+        player_two = Player.new(params[:player_two])
+        $game = Game.new(player_one, player_two)
         redirect "/play"
     end
 
 
     get '/play' do
-        @player_one = $player_one.name
-        @player_two = $player_two.name
+        @game = $game
         @player_two_hit_point = session[:player_two_hit_point]
         erb(:play)
 
@@ -30,9 +31,8 @@ class Battle < Sinatra::Base
 
 
     get '/attack' do
-        @player_one = $player_one
-        @player_two = $player_two
-        Game.new.attack(@player_two)
+        @game = $game
+        @game.attack(@game.player_two)
         erb :attack
       end
 
